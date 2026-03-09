@@ -18,7 +18,7 @@ class RoutersIndex extends Component
     {
         return [
             'name' => 'required|string|max:255',
-            'ip' => 'required|ipv4',
+            'ip' => 'required|string|max:255',
             'username' => 'required|string',
             'password' => 'required|string',
             'port' => 'required|integer',
