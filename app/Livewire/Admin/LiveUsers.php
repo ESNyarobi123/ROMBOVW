@@ -2,34 +2,41 @@
 
 namespace App\Livewire\Admin;
 
+use App\Services\MikrotikService;
 use Livewire\Component;
 
 class LiveUsers extends Component
 {
-    // Normally injected via MikrotikService
     public $activeUsers = [];
 
+    /**
+     * @param MikrotikService $mikrotik
+     */
     public function mount(MikrotikService $mikrotik)
     {
         $this->loadUsers($mikrotik);
     }
 
+    /**
+     * @param MikrotikService $mikrotik
+     */
     public function loadUsers(MikrotikService $mikrotik)
     {
         try {
             $this->activeUsers = $mikrotik->getConnectedUsers();
         } catch (\Exception $e) {
             $this->activeUsers = [];
-            // Log::error($e->getMessage());
         }
     }
 
+    /**
+     * @param string $userId
+     * @param MikrotikService $mikrotik
+     */
     public function forceDisconnect($userId, MikrotikService $mikrotik)
     {
         try {
-            // Execute disconnection via service
             $mikrotik->forceDisconnect($userId);
-            
             $this->loadUsers($mikrotik);
             $this->dispatch('notify', message: 'Mtumiaji amesitishwa (Disconnected)');
         } catch (\Exception $e) {

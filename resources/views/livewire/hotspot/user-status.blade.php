@@ -5,12 +5,12 @@ new class extends Component {
     public string $timeRemaining = '--:--:--';
     public string $dataRemaining = 'NA';
     
-    public function mount(MikrotikService $mikrotik)
+    public function mount(\App\Services\MikrotikService $mikrotik)
     {
         $this->updateStatus($mikrotik);
     }
 
-    public function updateStatus(MikrotikService $mikrotik)
+    public function updateStatus(\App\Services\MikrotikService $mikrotik)
     {
         // Try to find the user session in Mikrotik based on IP (Simplest way for browser)
         $ip = request()->ip();
@@ -35,7 +35,7 @@ new class extends Component {
         }
     }
     
-    public function disconnect(MikrotikService $mikrotik)
+    public function disconnect(\App\Services\MikrotikService $mikrotik)
     {
         $ip = request()->ip();
         $activeUsers = $mikrotik->getConnectedUsers();

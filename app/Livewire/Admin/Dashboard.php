@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public function render(MikrotikService $mikrotik)
+    public function render(\App\Services\MikrotikService $mikrotik)
     {
         // Fetch Real Database Stats
         $revenueToday = Payment::where('status', 'completed')

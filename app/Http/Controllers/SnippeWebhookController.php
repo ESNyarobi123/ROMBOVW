@@ -16,7 +16,7 @@ class SnippeWebhookController extends Controller
     /**
      * Inapokea (POST) Callback kutoka Snippe baada ya malipo kukamilika/kufeli.
      */
-    public function handle(Request $request, MikrotikService $mikrotik)
+    public function handle(Request $request, \App\Services\MikrotikService $mikrotik)
     {
         Log::info('SNIPPE WEBHOOK RECEIVED: ', $request->all());
 
@@ -78,7 +78,7 @@ class SnippeWebhookController extends Controller
                 if ($macAddress) {
                     try {
                         // Convert minutes to MikroTik time format (e.g. 60 -> 01:00:00)
-                        $uptimeLimit = MikrotikService::formatUptime($package->time_limit);
+                        $uptimeLimit = \App\Services\MikrotikService::formatUptime($package->time_limit);
                         
                         // We use the voucher code as both username and password for simplicity, 
                         // bound to the user's MAC address.

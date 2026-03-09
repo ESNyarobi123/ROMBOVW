@@ -23,7 +23,7 @@ class CleanupVouchers extends Command
     /**
      * Execute the console command.
      */
-    public function handle(MikrotikService $mikrotik)
+    public function handle(\App\Services\MikrotikService $mikrotik)
     {
         $this->info('Starting Voucher Cleanup Process...');
 

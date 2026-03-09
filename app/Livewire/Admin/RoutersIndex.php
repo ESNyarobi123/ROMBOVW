@@ -58,7 +58,7 @@ class RoutersIndex extends Component
     {
         $router = Router::find($id);
         try {
-            $service = new MikrotikService($router);
+            $service = new \App\Services\MikrotikService($router);
             $this->dispatch('notify', message: "Kimefanikiwa! Router {$router->name} imeitikia.");
         } catch (\Exception $e) {
             $this->dispatch('notify', message: "Imefeli! Mkaguzi anasema: " . $e->getMessage());
