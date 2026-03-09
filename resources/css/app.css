@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0a1711;
+    color: #ffffff;
+  }
+
+  /* Modern scrollbar matching the mobileX theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a1711;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #163625;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #39FF14;
+  }
+}
