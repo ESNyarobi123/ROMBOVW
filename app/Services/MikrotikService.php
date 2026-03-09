@@ -38,7 +38,7 @@ class MikrotikService
                 ->set('pass', $pass)
                 ->set('port', (int) $port)
                 ->set('ssl', (bool) env('MIKROTIK_SSL', false))
-                ->set('timeout', 5);
+                ->set('timeout', 3);
 
             $this->client = new Client($config);
         } catch (Exception $e) {
