@@ -57,9 +57,18 @@ class RoutersIndex extends Component
     public function testConnection($id)
     {
         $router = Router::find($id);
+        if (!$router) {
+            $this->dispatch('notify', message: "Imefeli! Router haijapatikana.");
+            return;
+        }
+        
         try {
             $service = new \App\Services\MikrotikService($router);
-            $this->dispatch('notify', message: "Kimefanikiwa! Router {$router->name} imeitikia.");
+            if ($service->isConnected()) {
+                $this->dispatch('notify', message: "Kimefanikiwa! Router {$router->name} imekubali na kuunganishwa kikamilifu.");
+            } else {
+                $this->dispatch('notify', message: "Imefeli! Mkaguzi ameshindwa kufikia Router. Angalia IP au Port.");
+            }
         } catch (\Exception $e) {
             $this->dispatch('notify', message: "Imefeli! Mkaguzi anasema: " . $e->getMessage());
         }

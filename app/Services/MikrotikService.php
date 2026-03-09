@@ -16,22 +16,27 @@ class MikrotikService
 {
     protected ?Client $client = null;
 
-    public function __construct()
+    public function __construct($router = null)
     {
-        $this->connect();
+        $this->connect($router);
     }
 
     /**
      * Establishment of connection to the MikroTik Router
      */
-    protected function connect(): void
+    protected function connect($router = null): void
     {
         try {
+            $ip = $router ? $router->ip : env('MIKROTIK_IP', '192.168.1.100');
+            $user = $router ? $router->username : env('MIKROTIK_USER', 'admin');
+            $pass = $router ? $router->password : env('MIKROTIK_PASS', '12345');
+            $port = $router ? $router->port : (int) env('MIKROTIK_PORT', 8728);
+
             $config = (new Config())
-                ->set('host', env('MIKROTIK_IP', '192.168.1.100'))
-                ->set('user', env('MIKROTIK_USER', 'admin'))
-                ->set('pass', env('MIKROTIK_PASS', '12345'))
-                ->set('port', (int) env('MIKROTIK_PORT', 8728))
+                ->set('host', $ip)
+                ->set('user', $user)
+                ->set('pass', $pass)
+                ->set('port', (int) $port)
                 ->set('ssl', (bool) env('MIKROTIK_SSL', false))
                 ->set('timeout', 5);
 
